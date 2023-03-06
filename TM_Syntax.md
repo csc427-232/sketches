@@ -45,13 +45,13 @@ Using the blank for the initial tape contents is allowed, it will be rewritten t
 An Ident is the label of a state.
 
 A StateStanza names to from state after the colon and each StateTransition line gives
-one transition according to the syntax (for the case of k=1):
+one transition per line,
 
 <pre>    read-symbol write-symbol action new-state </pre>
 
-For the case of k&gt;1, 
+For general `k` tapes,
 
-<pre> read-tape-1 ... read-tape-k write-tape-1 .. write-tape-k action-tape-1 ... action-tape-2 new-state </pre>
+<pre> read-tape-1 ... read-tape-k write-tape-1 .. write-tape-k action-tape-1 ... action-tape-k new-state </pre>
 
 The action is either l, r or n, meaning move left, move right, or no move. 
 If the code for the action captialized (L, R, or N) the machine configuration is printed after the transition.
