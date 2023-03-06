@@ -15,7 +15,7 @@
 #    15 mar 2022, updated for session 222 
 #    27 mar 2022, add get_tape method
 #
-# copyright: Creative Commons. See http://www.cs.miami.edu/home/burt
+# copyright 2023 (c) All Rights Reserved.
 #
 
 
