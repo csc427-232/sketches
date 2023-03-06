@@ -20,20 +20,6 @@ I tend to use the ampersand, &amp; as a pound sign substitute.
 
 The grammar:
 
-- __M__ -> (__Stanza__ [emptyline])*
-- __Stanza__ -> __StartStanza__ | __TapesStanza__ | __AcceptStanza__ | __RejectStanza__ | __StateStanza__
-- __StartStanza__ -> "start:" __Ident__
-- __TapesStanza__ -> "tapes:" number
-- __AcceptStanza__ -> "accept:" __Ident__ (\n\t __Ident__)*
-- __RejectStanza__ -> "reject:" __Ident__ (\n\t __Ident__)*
-- __StateStanza__ -> "state:" __Ident__ (\n\t __StateTransition__)+
-- __StateTransition__ -> (__Symbol__|__Special__){k} (__Symbol__|__Special__){k} __Action__{k} __Ident__
-- __Symbol__ -> tape symbols are alphanumeric or punctuation ! $ % & ( ) * + , - . or /
-- __Special__ -> the : and _
-- __Action__ -> the characters l, r and n or uppercase L, R and N.
-- __Ident__ -> a nonempty string of alphanumerics
-
-
 <pre>
   M -> (Stanza [emptyline])*
   Stanza -> StartStanza | TapesStanza | AcceptStanza | RejectStanza | StateStanza
