@@ -1,23 +1,24 @@
 
 ## Turing Machine Simulator Syntax 
 
-The Turing Machine Simulator has two classes. The first is the Turing Machine Simulator. The object takes a 
-Python dictionary describing the states and transitions. The second object is a parser that takes a text
-description and creates the dictionary object needed by the Turing Machine. This makes it easier to write
-the program.
+The file `turing_machine_simulator.py` as two classes, `Turing Machine` and `MachineParser`.
 
-This is a description of the syntax and language features of the parser.
+The simulator class instantiates an object containing the rules, the states and alphabets, 
+and can run and depict the run. To ease programming, the parser class creates the Turing Machine
+and writes its program from a description given in the following syntax.
+
+
 
 The file is a sequence of stanzas. Each stanza starts with a head line starting 
 in the first column. The first word in the head line as a keyword indicating 
 the type of stanza. A stanza may have continuation lines, each are indented.
 
 The # character starts a comment, and the comment extends to the end of the line. 
-Since the # is used for this 
-purpose it cannot be a tape symbol. If you wish to code programs in the textbook that use
-the # symbol, substitute with one of the allowed punctuations.
+Since the # is used for this  purpose it cannot be a tape symbol. If you wish to code programs 
+in the textbook that use the # symbol, substitute with one of the allowed punctuations. 
+I tend to use the ampersand, &amp; as a pound sign substitute.
 
-The syntax can be described by the following grammar.
+The grammar:
 
 - __M__ -> (__Stanza__ [emptyline])*
 - __Stanza__ -> __StartStanza__ | __TapesStanza__ | __AcceptStanza__ | __RejectStanza__ | __StateStanza__
@@ -26,11 +27,27 @@ The syntax can be described by the following grammar.
 - __AcceptStanza__ -> "accept:" __Ident__ (\n\t __Ident__)*
 - __RejectStanza__ -> "reject:" __Ident__ (\n\t __Ident__)*
 - __StateStanza__ -> "state:" __Ident__ (\n\t __StateTransition__)+
-- __StateTransition__ -> (__Symbol__|__Special__){k} (__Symbol__|__Special__){k} __Action__ __Ident__
+- __StateTransition__ -> (__Symbol__|__Special__){k} (__Symbol__|__Special__){k} __Action__{k} __Ident__
 - __Symbol__ -> tape symbols are alphanumeric or punctuation ! $ % & ( ) * + , - . or /
 - __Special__ -> the : and _
 - __Action__ -> the characters l, r and n or uppercase L, R and N.
 - __Ident__ -> a nonempty string of alphanumerics
+
+
+<pre>
+  M -> (Stanza [emptyline])*
+  Stanza -> StartStanza | TapesStanza | AcceptStanza | RejectStanza | StateStanza
+  StartStanza -> "start:" Ident
+  TapesStanza -> "tapes:" number
+  AcceptStanza -> "accept:" Ident (\n\t Ident)*
+  RejectStanza -> "reject:" Ident (\n\t Ident)*
+  StateStanza -> "state:" Ident (\n\t StateTransition)+
+  StateTransition -> (Symbol|Special){k} (Symbol|Special){k} Action{k} Ident
+  Symbol -> tape symbols are alphanumeric or punctuation ! $ % & ( ) * + , - . or /
+  Special -> the : and _
+  Action -> the characters l, r and n or uppercase L, R and N.
+  Ident -> a nonempty string of alphanumerics
+</pre>
 
 There must be exactly one start, accept and reject stanzas.
 
@@ -47,11 +64,14 @@ one transition according to the syntax (for the case of k=1):
 <pre>    read-symbol write-symbol action new-state </pre>
 
 For the case of k&gt;1, 
-The StateTransition line is interpreted as first the k tape symbols to match on the k tapes; then the k tape symbols to write on the k tapes, then the k actions to undertake on the k tapes.
 
-The action is either l, r or n, meaning move left, move right, or no move. As a debuging feature, if the code for the action captialized the machine configuration is printed after the transition.
+<pre> read-tape-1 ... read-tape-k write-tape-1 .. write-tape-k action-tape-1 ... action-tape-2 new-state </pre>
 
-The colon (:) is a wildcard. It's use among the k read symbols matches any symbol. Four use cases are allowed, and are listed in the priority the case is applied,
+The action is either l, r or n, meaning move left, move right, or no move. 
+If the code for the action captialized (L, R, or N) the machine configuration is printed after the transition.
+
+The colon (:) is a wildcard. It's use among the k read symbols matches any symbol. 
+Four use cases are allowed, and are listed in the priority the case is applied,
 
     No wildcards. An exact match of the k type symbols has top precedence.
     One wildcard. An exact match for all but one symbol is tried if 
@@ -61,6 +81,7 @@ The colon (:) is a wildcard. It's use among the k read symbols matches any symbo
     All wildcards. The default matches anything.
 
 When the wildcard appearing as a write symbol, it is set equal to the read symbol, on the corresponding tape.
+Priority within one of the four classes is right to left.
 
 A missing transition halts with reject. This and the wildcard are convenience features to
 shorten the TM programs.
