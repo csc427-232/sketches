@@ -56,7 +56,7 @@ For general `k` tapes,
 The action is either l, r or n, meaning move left, move right, or no move. 
 If the code for the action captialized (L, R, or N) the machine configuration is printed after the transition.
 
-The colon (:) is a wildcard. It's use among the k read symbols matches any symbol. 
+The colon (:) is a wildcard. Its use among the k read symbols matches any symbol. 
 Four use cases are allowed, and are listed in the priority the case is applied,
 
     No wildcards. An exact match of the k type symbols has top precedence.
