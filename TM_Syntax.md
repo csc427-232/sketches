@@ -79,3 +79,6 @@ If the machine rejects, it can be queried for the cause of the reject,
     Reject bedcause the computation terminated for excessive computation steps.
 
 The method is_exception classes the first two rejects as correct computations, and the last as an exception.
+
+See these [examples](https://github.com/csc427-232/sketches/blob/main/turing_machine_sketch.ipynb).
+
